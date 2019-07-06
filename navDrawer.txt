@@ -75,6 +75,7 @@ const CustomDrawerContentComponent = props => (
     <SafeAreaView
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}>
+          {/* DrawerItems: displays items  */}
       <DrawerItems {...props} />
       <Image
         style={styles.image}
@@ -92,11 +93,11 @@ const navigator = createDrawerNavigator(
     Profile,
   },
   {
-    // drawerType: 'back',
-    // drawerPosition: 'right',
-    // drawerWidth: 200,
-    // drawerBackgroundColor: 'orange',
-    // contentComponent: CustomDrawerContentComponent
+    drawerType: 'back', //slide
+    drawerPosition: 'left',
+    drawerWidth: 200,
+    drawerBackgroundColor: 'orange',
+    contentComponent: CustomDrawerContentComponent
   }
 );
 

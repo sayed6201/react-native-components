@@ -1,0 +1,168 @@
+import React from 'react';
+import { createBottomTabNavigator } from 'react-navigation';
+import { First, Second, Third } from '../components/Screens';
+
+// https://reactnavigation.org/docs/en/bottom-tab-navigator.html
+export default createBottomTabNavigator(
+  {
+    First,
+    Second,
+    Third,
+  },
+  {
+    initialRouteName: 'Second',
+    tabBarOptions: {
+      // // //' - Label and icon color of the active tab.'
+      // activeTintColor: 'orange',
+      // // //' - Background color of the active tab.'
+      // activeBackgroundColor: 'green',
+      // // //' - Label and icon color of the inactive tab.'
+      // inactiveTintColor: 'blue',
+      // // //' - Background color of the inactive tab.'
+      // inactiveBackgroundColor: 'yellow',
+      // // //' - Style object for the tab bar.'
+      // style: { borderWidth: 2, borderColor: 'purple' },
+      // // //' - Style object for the tab label.'
+      // labelStyle: { fontWeight: 'bold' },
+      // // //' - Style object for the tab.'
+      // tabStyle: { paddingBottom: 16 },
+      // // //' - Whether to show label for tab, default is true.'
+      // showLabel: false,
+      // // //' - Whether to show icon for tab, default is true.'
+      // showIcon: false,
+    },
+  }
+);
+
+
+
+
+=========================================================
+Exporting in App.js
+=========================================================
+
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { View } from 'react-native';
+import Navigator from './navigators/Navigator';
+
+// https://reactnavigation.org/
+
+const App = createAppContainer(Navigator);
+
+// export default App;
+
+export default () => (
+  <View style={{ flex: 1, marginTop: 20 }}>
+    <App />
+  </View>
+);
+
+
+
+
+===============================================================
+Components
+===============================================================
+import React from 'react';
+import { TabNavigator } from 'react-navigation';
+import { View, Text, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo';
+
+import tabBarIcon from './tabBarIcon';
+
+// single class for all component class, rather then creating 3 seperate class 
+const createScreen = ({ icon, colors, title }) => {
+    //returns class..
+  return class SomeScreen extends React.Component {
+    static navigationOptions = {
+      tabBarIcon: tabBarIcon(icon),
+    };
+
+    render() {
+      return (
+        <LinearGradient style={styles.container} colors={colors}>
+          <Text style={styles.text}>{hi + title}</Text>
+        </LinearGradient>
+      );
+    }
+  };
+};
+
+export const First = createScreen({
+  icon: 'photo-album',
+  colors: ['#F0FF19', '#00ff00'],
+  title: 'Screen 1',
+});
+
+export const Second = createScreen({
+  icon: 'inbox',
+  colors: ['#ffad73', '#ff6666', '#ff0000'],
+  title: 'Screen 1',
+});
+
+export const Third = createScreen({
+  icon: 'favorite',
+  colors: ['#4c669f', '#3b5998', '#192f6a'],
+  title: 'You will not learn anything from this video',
+});
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    padding: 8,
+  },
+  text: {
+    fontSize: 36,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+  },
+});
+
+
+
+
+=============================================================
+Material Bottom Tav nav ( not wprking )
+=============================================================
+
+import React from 'react';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createAppContainer } from 'react-navigation';
+import { First, Second, Third } from '../components/Screens';
+import { StyleSheet } from 'react-native';
+
+// https://reactnavigation.org/docs/en/material-bottom-tab-navigator.html
+export default createMaterialBottomTabNavigator(
+  {
+    First,
+    Second,
+    Third,
+    Third
+  },
+  // simpleStyledConfig
+  shiftingConfig
+);
+
+const simpleStyledConfig = {
+    shifting: false,
+    activeColor: '#6200ee',
+    inactiveColor: '#828792',
+    barStyle: {
+      backgroundColor: '#f8f7f9',
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderStyle: 'solid',
+      borderColor: '#d0cfd0',
+    },
+  };
+  
+  const shiftingConfig = {
+    shifting: false,
+    labeled: false,
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+    barStyle: { backgroundColor: '#694fad' },
+  };
